@@ -1,0 +1,65 @@
+## \-\--
+
+title: "Sharkss" format: html editor: visual author: TIMOTHY ACHALA \-\--
+
+## LOADING THE LIBRARIES
+
+```{r warning=FALSE, message=FALSE}
+library(readr)
+library(tidyverse)
+library(gtExtras)
+```
+
+## IMPORTING THE DATASET
+
+```{r warning=FALSE, message=FALSE, error=FALSE}
+Sharks <- read.csv("E:/data sets/Sharks.csv")
+```
+
+### STRUCTURE OF THE DATASET
+
+```{r warning=FALSE, message=FALSE, error=FALSE}
+str(Sharks)
+summary(Sharks)
+class(Sharks)
+```
+
+```{r warning=FALSE, error=FALSE}
+newSharks <-Sharks %>%
+  select(-Investigator.or.Source:-Case.Number.2)
+
+newSharks %>% 
+  head(15) %>% 
+  gt() %>% 
+  gt_theme_guardian() %>% 
+  tab_header(title = "Sharks characters")
+```
+
+## REMOVING UNNECESSARY COLUMNS
+
+```{r error=FALSE, warning=FALSE}
+newSharks <-Sharks %>%
+  select(-Investigator.or.Source:-Case.Number.2)
+```
+
+### use of case when conditional statement to do encoding
+
+```{r warning=FALSE, error=FALSE}
+newSharks <-Sharks %>%
+  select(-Investigator.or.Source:-Case.Number.2)
+
+newSharks %>% 
+  select(Case.Number, Date, Year, Type, Country, Area,Location,Activity, Name, Sex, Age,Injury, Fatal..Y.N., Time, Species, original.order) %>% 
+  mutate(Type= case_when(Type == "Unprovoked" ~ "1",
+                         Type ==  " Provoked" ~ "2",
+                         Type == "Invalid" ~ "3",
+                         Type == "Boat" ~ "4",
+                         Type == "Sea Disaster"~ "5",
+                         Type == "Boating" ~ "6",
+                         TRUE ~ "7")) %>% 
+  mutate(Sex = case_when(Sex == "M" ~ "0",
+                         TRUE ~ "1")) %>%
+  mutate(Fatal..Y.N. = case_when(Fatal..Y.N. == "N"~ "0",
+                                 TRUE ~ "1")) %>% 
+  View()
+```
