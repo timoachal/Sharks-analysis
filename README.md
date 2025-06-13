@@ -1,4 +1,4 @@
-````markdown name=README.md
+
 # Sharks Analysis
 
 This project contains a brief **Exploratory Data Analysis (EDA)** of a shark attack dataset using R. The analysis focuses on cleaning the data, transforming variables for easier analysis, and visualizing some key features of shark attack incidents worldwide.
@@ -79,4 +79,4 @@ mapdata <- left_join(mapdata, Newsharks %>% select(region, Age), by = "region")
 
 **Note:**  
 This EDA serves as a foundation for deeper statistical and visualization work on shark attack patterns globally.
-````
+
